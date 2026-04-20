@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Andy Perciballi — PageFly Portfolio</title>
+<meta name="description" content="Shopify / PageFly design portfolio + a live CRM case study. Eight aesthetic directions, two D&D-specific concepts with product pages, and BoothCRM." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&family=Space+Mono:wght@400;700&family=DM+Serif+Display&family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;700&family=Syne:wght@400;700;800&family=MedievalSharp&family=Uncial+Antiqua&family=Cinzel:wght@500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================================
+   GLOBAL
+   ========================================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #0a0a0b;
+  color: #e8e8ea;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; border: none; cursor: pointer; background: none; color: inherit; }
+
+/* Sticky portfolio nav */
+.pf-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; gap: 1.25rem; align-items: center;
+  padding: .85rem 1.5rem;
+  background: rgba(10,10,11,.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #23232a;
+  font-family: 'Inter', sans-serif;
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+  overflow-x: auto; white-space: nowrap;
+}
+.pf-nav .brand { color: #fff; font-weight: 700; letter-spacing: .2em; margin-right: auto; }
+.pf-nav a { text-decoration: none; color: #8a8a94; transition: color .2s; }
+.pf-nav a:hover { color: #fff; }
+.pf-nav a.live { color: #6bf090; }
+.pf-nav a.live::before { content: "●"; margin-right: .35rem; }
+
+/* Cover */
+.pf-cover {
+  min-height: 90vh;
+  display: grid; place-items: center;
+  text-align: center;
+  padding: 5rem 1.5rem 4rem;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(200,100,50,.15), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(70,120,200,.12), transparent 45%),
+    #0a0a0b;
+}
+.pf-cover .small-label {
+  font-family: 'Space Mono', monospace; font-size: .7rem;
+  letter-spacing: .4em; color: #8a8a94; margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.pf-cover h1 {
+  font-family: 'Fraunces', serif; font-weight: 300;
+  font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 1.05;
+  color: #fafafa; max-width: 18ch; margin: 0 auto;
+}
+.pf-cover h1 em { font-style: italic; font-weight: 600; color: #f0c878; }
+.pf-cover p.lede {
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  max-width: 55ch; margin: 2rem auto 0;
+  color: #b5b5bf; font-size: 1.1rem;
+}
+.pf-cover .index {
+  margin-top: 3.5rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px; max-width: 980px; width: 100%;
+  background: #23232a; border: 1px solid #23232a;
+}
+.pf-cover .index a {
+  background: #0a0a0b; padding: 1.1rem 1rem;
+  text-decoration: none;
+  font-family: 'Space Mono', monospace; font-size: .72rem;
+  letter-spacing: .15em; color: #b5b5bf; text-transform: uppercase;
+  transition: background .2s, color .2s;
+  text-align: center;
+}
+.pf-cover .index a:hover { background: #f0c878; color: #0a0a0b; }
+.pf-cover .index a span { display: block; color: #6a6a74; font-size: .65rem; margin-bottom: .3rem; }
+.pf-cover .index a.hilite span { color: #f0c878; }
+
+/* Concept label */
+.concept-label {
+  padding: 1rem 1.5rem;
+  background: #0a0a0b;
+  border-top: 1px solid #23232a;
+  border-bottom: 1px solid #23232a;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Space Mono', monospace; font-size: .7rem;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: #8a8a94;
+  gap: 1rem; flex-wrap: wrap;
+}
+.concept-label .num { color: #f0c878; }
+.concept-label .tag { color: #6a6a74; }
+
+/* Shared: "view switcher" chip inside D&D concepts */
+.view-switch {
+  display: inline-flex; gap: 0; margin-bottom: 2rem;
+  font-family: 'Space Mono', monospace; font-size: .7rem;
+  letter-spacing: .2em; text-transform: uppercase;
+}
+.view-switch span {
+  padding: .5rem 1rem; border: 1px solid currentColor;
+}
+.view-switch span.active { background: currentColor; }
+.view-switch span.active .inner { color: var(--flip, #fff); }
+.view-switch .inner { color: inherit; }
+
+/* =========================================================================
+   CONCEPT A — TAVERN PARCHMENT (D&D)
+   Warm parchment, crimson & gold, Medieval display + IM Fell body.
+   Landing page first, then product page.
+   ========================================================================= */
+.ta {
+  --ta-parch: #f2e3bc;
+  --ta-parch-dk: #d9c291;
+  --ta-ink: #1e120a;
+  --ta-crimson: #8b1a1a;
+  --ta-crimson-dk: #5a0f0f;
+  --ta-gold: #c8932a;
+  --ta-gold-br: #f1d98a;
+
+  color: var(--ta-ink);
+  font-family: 'IM Fell English', Georgia, serif;
+  background:
+    radial-gradient(ellipse at top left, rgba(139,26,26,.1), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(200,147,42,.12), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(139,101,40,.03) 0 2px, transparent 2px 6px),
+    linear-gradient(180deg, #f2e3bc 0%, #e3cf9c 100%);
+}
+
+/* ---------- TAVERN LANDING ---------- */
+.ta-landing { padding: 5rem 1.5rem 4rem; position: relative; overflow: hidden; }
+.ta-landing::before {
+  /* giant faded D20 silhouette */
+  content: "";
+  position: absolute; top: 10%; right: -100px; width: 520px; height: 520px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><polygon points='100,10 180,55 180,145 100,190 20,145 20,55' fill='none' stroke='%238b1a1a' stroke-width='2' opacity='0.15'/><polygon points='100,10 100,190 20,145 20,55' fill='none' stroke='%238b1a1a' stroke-width='1.5' opacity='0.12'/><polygon points='100,10 100,190 180,145 180,55' fill='none' stroke='%238b1a1a' stroke-width='1.5' opacity='0.12'/><text x='100' y='120' font-family='Cinzel' font-size='60' fill='%238b1a1a' opacity='0.2' text-anchor='middle' font-weight='900'>20</text></svg>");
+  background-repeat: no-repeat; background-size: contain;
+  pointer-events: none;
+}
+.ta-wrap { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+.ta-view {
+  display: inline-block; padding: .4rem 1rem;
+  background: var(--ta-ink); color: var(--ta-parch);
+  font-family: 'Cinzel', serif; font-size: .7rem;
+  letter-spacing: .3em; text-transform: uppercase; margin-bottom: 2rem;
+}
+
+.ta-hero { text-align: center; padding: 2rem 0 3rem; }
+.ta-hero .kicker {
+  display: inline-block; font-family: 'Cinzel', serif; font-weight: 700;
+  font-size: .72rem; letter-spacing: .4em; text-transform: uppercase;
+  color: var(--ta-crimson); padding: .5rem 1rem;
+  border: 1px solid var(--ta-crimson); background: rgba(242,227,188,.6);
+  margin-bottom: 1.5rem;
+}
+.ta-hero h2 {
+  font-family: 'MedievalSharp', 'Cinzel', serif;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 1; margin: 0 auto 1rem;
+  color: var(--ta-ink); max-width: 20ch;
+  text-shadow: 2px 2px 0 var(--ta-gold);
+}
+.ta-hero h2 .crimson { color: var(--ta-crimson); }
+.ta-hero p.sub {
+  font-size: 1.2rem; max-width: 54ch; margin: 0 auto 2rem;
+  color: #3a2416; font-style: italic;
+}
+.ta-cta {
+  display: inline-block;
+  font-family: 'Cinzel', serif; font-weight: 900;
+  letter-spacing: .2em; text-transform: uppercase; font-size: .95rem;
+  padding: 1.1rem 2.4rem;
+  color: var(--ta-parch); background: var(--ta-crimson);
+  border: 3px double var(--ta-gold);
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--ta-ink);
+  transition: transform .15s, box-shadow .15s;
+}
+.ta-cta:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ta-ink); }
+.ta-cta-note { display: block; margin-top: .8rem; font-size: .85rem; color: #6a4a30; letter-spacing: .1em; }
+
+/* Stat block grid */
+.ta-stats { margin-top: 4rem; padding: 3rem 0; border-top: 2px solid var(--ta-ink); border-bottom: 2px solid var(--ta-ink); }
+.ta-stats h3 {
+  font-family: 'MedievalSharp', serif; font-size: 2.25rem;
+  color: var(--ta-ink); text-align: center; margin-bottom: 2.5rem;
+}
+.ta-stats h3::before, .ta-stats h3::after { content: "✦"; color: var(--ta-crimson); margin: 0 1rem; }
+
+.ta-stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+.ta-stat-card {
+  background: var(--ta-parch); padding: 1.5rem;
+  border: 2px solid var(--ta-gold);
+  position: relative;
+}
+.ta-stat-card::before {
+  content: ""; position: absolute; inset: 5px;
+  border: 1px solid var(--ta-gold); pointer-events: none;
+}
+.ta-stat-card .stat-type {
+  font-family: 'Cinzel', serif; font-size: .68rem;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ta-crimson); margin-bottom: .5rem;
+}
+.ta-stat-card h4 {
+  font-family: 'MedievalSharp', serif; font-size: 1.4rem;
+  color: var(--ta-ink); margin-bottom: .6rem;
+}
+.ta-stat-card p { font-size: .98rem; }
+.ta-stat-card .stat-line {
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px dashed var(--ta-crimson);
+  font-family: 'Cinzel', serif; font-size: .75rem;
+  color: var(--ta-crimson); letter-spacing: .1em;
+}
+
+/* Testimonial scroll */
+.ta-scroll {
+  margin-top: 4rem; padding: 3rem 1.5rem; text-align: center;
+  background: #2a1510; color: var(--ta-parch);
+}
+.ta-scroll blockquote {
+  font-family: 'IM Fell English', serif; font-style: italic; font-size: 1.3rem;
+  max-width: 52ch; margin: 0 auto; line-height: 1.5;
+}
+.ta-scroll blockquote::before, .ta-scroll blockquote::after { content: '"'; color: var(--ta-gold); font-size: 2rem; }
+.ta-scroll cite {
+  display: block; margin-top: 1.25rem;
+  font-family: 'Cinzel', serif; letter-spacing: .3em; font-size: .72rem;
+  color: var(--ta-gold); font-style: normal; text-transform: uppercase;
+}
+
+/* ---------- TAVERN PRODUCT PAGE ---------- */
+.ta-product {
+  background: var(--ta-parch);
+  border-top: 2px solid var(--ta-ink);
+  padding: 4rem 1.5rem;
+}
+.ta-breadcrumb {
+  font-family: 'Cinzel', serif; font-size: .7rem;
+  letter-spacing: .3em; text-transform: uppercase; color: var(--ta-crimson);
+  margin-bottom: 2rem;
+}
+.ta-breadcrumb a { text-decoration: none; opacity: .8; }
+.ta-breadcrumb span { color: var(--ta-ink); }
+
+.ta-prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+@media (max-width: 820px) { .ta-prod-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* Product image — CSS-drawn "box" with glyphs */
+.ta-prod-img {
+  aspect-ratio: 1/1;
+  background: linear-gradient(180deg, #5a0f0f 0%, #2a0707 100%);
+  border: 4px solid var(--ta-gold);
+  position: relative;
+  box-shadow: 0 10px 30px rgba(30,18,10,.4);
+}
+.ta-prod-img::before {
+  content: ""; position: absolute; inset: 12px;
+  border: 1px solid var(--ta-gold-br); opacity: .4;
+}
+.ta-prod-img::after {
+  content: "✦"; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-size: clamp(6rem, 15vw, 10rem);
+  color: var(--ta-gold-br); opacity: .5;
+  font-family: 'Cinzel', serif;
+}
+.ta-prod-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin-top: .75rem; }
+.ta-prod-thumbs div {
+  aspect-ratio: 1/1;
+  background: linear-gradient(180deg, #5a0f0f 0%, #2a0707 100%);
+  border: 2px solid var(--ta-gold);
+  opacity: .55; cursor: pointer;
+  transition: opacity .2s;
+}
+.ta-prod-thumbs div:first-child { opacity: 1; }
+.ta-prod-thumbs div:hover { opacity: .9; }
+
+/* Product info */
+.ta-prod-info .rarity {
+  display: inline-block;
+  font-family: 'Cinzel', serif; font-size: .72rem;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ta-crimson); padding: .35rem .75rem;
+  border: 1px solid var(--ta-crimson);
+  margin-bottom: 1rem;
+}
+.ta-prod-info h1 {
+  font-family: 'MedievalSharp', serif; font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05; color: var(--ta-ink); margin-bottom: .5rem;
+}
+.ta-prod-info .subtitle {
+  font-style: italic; color: #5a4030; margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+.ta-prod-info .price-row {
+  display: flex; align-items: baseline; gap: 1rem;
+  padding: 1rem 0; border-top: 1px solid var(--ta-ink); border-bottom: 1px solid var(--ta-ink);
+  margin-bottom: 1.5rem;
+}
+.ta-prod-info .price {
+  font-family: 'Cinzel', serif; font-weight: 900; font-size: 2rem;
+  color: var(--ta-ink);
+}
+.ta-prod-info .price-was {
+  text-decoration: line-through; color: #8a6a4a;
+  font-size: 1.1rem;
+}
+.ta-prod-info .ship {
+  font-size: .85rem; color: var(--ta-crimson); letter-spacing: .1em;
+  font-family: 'Cinzel', serif; text-transform: uppercase;
+  margin-left: auto;
+}
+
+.ta-prod-info p.desc { margin-bottom: 1.5rem; font-size: 1.05rem; }
+
+/* Variant selector */
+.ta-variants { margin-bottom: 1.5rem; }
+.ta-variants .label {
+  font-family: 'Cinzel', serif; font-size: .72rem;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ta-ink); margin-bottom: .5rem;
+}
+.ta-variants .opts { display: flex; gap: .5rem; flex-wrap: wrap; }
+.ta-variants .opts label {
+  padding: .6rem 1rem;
+  border: 2px solid var(--ta-ink);
+  font-family: 'Cinzel', serif; font-size: .8rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  cursor: pointer;
+  background: transparent;
+  transition: background .15s, color .15s;
+}
+.ta-variants .opts label.chosen { background: var(--ta-ink); color: var(--ta-parch); }
+.ta-variants .opts label:hover { background: var(--ta-crimson); color: var(--ta-parch); border-color: var(--ta-crimson); }
+
+.ta-qty-row {
+  display: flex; gap: .75rem; align-items: stretch; margin-bottom: 1.25rem;
+}
+.ta-qty {
+  display: inline-flex; align-items: center;
+  border: 2px solid var(--ta-ink);
+  font-family: 'Cinzel', serif;
+}
+.ta-qty button { padding: 0 1rem; font-size: 1.2rem; color: var(--ta-ink); }
+.ta-qty span { padding: 0 1rem; border-left: 1px solid var(--ta-ink); border-right: 1px solid var(--ta-ink); }
+
+.ta-prod-info .ta-cta { flex: 1; text-align: center; }
+
+.ta-includes {
+  margin-top: 2rem; padding: 1.5rem;
+  background: rgba(30,18,10,.06);
+  border-left: 3px solid var(--ta-crimson);
+}
+.ta-includes h5 { font-family: 'Cinzel', serif; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--ta-crimson); margin-bottom: .75rem; }
+.ta-includes ul { list-style: none; padding: 0; }
+.ta-includes li {
+  padding: .35rem 0; font-size: .98rem;
+  position: relative; padding-left: 1.5rem;
+}
+.ta-includes li::before {
+  content: "✦"; position: absolute; left: 0;
+  color: var(--ta-gold); top: .35rem;
+}
+
+/* =========================================================================
+   CONCEPT B — OBSIDIAN ARCANE (D&D, dark variant)
+   Near-black with ember accents, rune energy, spellbook feel.
+   Completely different feel from concept A.
+   ========================================================================= */
+.oa {
+  --oa-ink: #0d0806;
+  --oa-ink-2: #1a0f0a;
+  --oa-ember: #e8893a;
+  --oa-ember-dk: #a85a1f;
+  --oa-arcane: #6a4acd;
+  --oa-bone: #ebe0c7;
+  --oa-smoke: #8a7a68;
+
+  color: var(--oa-bone);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(232,137,58,.15), transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(106,74,205,.12), transparent 55%),
+    #0d0806;
+}
+
+/* ---------- OBSIDIAN LANDING ---------- */
+.oa-landing {
+  padding: 6rem 1.5rem 4rem;
+  position: relative; overflow: hidden;
+}
+.oa-landing::before {
+  /* ember glow at bottom */
+  content: ""; position: absolute;
+  bottom: -200px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse at center, rgba(232,137,58,.25), transparent 65%);
+  pointer-events: none;
+}
+.oa-wrap { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+.oa-view {
+  display: inline-block; padding: .4rem 1rem;
+  background: var(--oa-ember); color: var(--oa-ink);
+  font-family: 'Cinzel', serif; font-size: .7rem;
+  letter-spacing: .3em; text-transform: uppercase; margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.oa-hero { text-align: center; padding: 1rem 0 3rem; position: relative; }
+
+/* Rune ring behind title */
+.oa-hero .rune-ring {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(300px, 40vw, 520px); height: clamp(300px, 40vw, 520px);
+  border-radius: 50%;
+  border: 1px solid rgba(232,137,58,.25);
+  pointer-events: none;
+}
+.oa-hero .rune-ring::before {
+  content: ""; position: absolute; inset: 20px;
+  border: 1px dashed rgba(232,137,58,.15);
+  border-radius: 50%;
+  animation: oaSpin 90s linear infinite;
+}
+@keyframes oaSpin { to { transform: rotate(360deg); } }
+
+.oa-hero .kicker {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: 'Cinzel', serif; font-weight: 500;
+  font-size: .7rem; letter-spacing: .45em; text-transform: uppercase;
+  color: var(--oa-ember); margin-bottom: 1.5rem;
+  position: relative;
+}
+.oa-hero .kicker::before, .oa-hero .kicker::after {
+  content: ""; display: inline-block; width: 40px; height: 1px;
+  background: var(--oa-ember-dk);
+}
+.oa-hero h2 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-style: italic;
+  font-size: clamp(2.5rem, 6.5vw, 5rem);
+  line-height: 1.05; max-width: 20ch;
+  margin: 0 auto 1rem;
+  color: var(--oa-bone);
+  position: relative;
+}
+.oa-hero h2 .ember {
+  color: var(--oa-ember); font-style: normal;
+  font-family: 'Uncial Antiqua', serif;
+}
+.oa-hero p.sub {
+  font-size: 1.15rem; max-width: 52ch; margin: 0 auto 2.5rem;
+  color: #b5a894; position: relative;
+}
+.oa-cta {
+  display: inline-flex; align-items: center; gap: .75rem;
+  font-family: 'Cinzel', serif; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; font-size: .85rem;
+  padding: 1.15rem 2.4rem;
+  color: var(--oa-ink); background: var(--oa-ember);
+  text-decoration: none;
+  position: relative;
+  transition: background .2s, transform .15s;
+}
+.oa-cta::after { content: "→"; }
+.oa-cta:hover { background: var(--oa-bone); transform: translateY(-2px); }
+.oa-cta-sub {
+  display: block; margin-top: 1rem; font-size: .85rem;
+  color: var(--oa-smoke); letter-spacing: .15em;
+  font-family: 'Cinzel', serif; text-transform: uppercase;
+}
+
+/* Pillars — three dark columns */
+.oa-pillars {
+  margin-top: 5rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: rgba(232,137,58,.15);
+  border: 1px solid rgba(232,137,58,.15);
+}
+@media (max-width: 780px) { .oa-pillars { grid-template-columns: 1fr; } }
+.oa-pillar {
+  background: var(--oa-ink-2); padding: 2.5rem 1.75rem;
+  text-align: center;
+}
+.oa-pillar .rune {
+  width: 60px; height: 60px; margin: 0 auto 1.25rem;
+  border: 1px solid var(--oa-ember);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--oa-ember);
+  font-family: 'Uncial Antiqua', serif; font-size: 1.5rem;
+  position: relative;
+}
+.oa-pillar .rune::before {
+  content: ""; position: absolute; inset: -6px;
+  border: 1px dashed rgba(232,137,58,.3);
+  border-radius: 50%;
+}
+.oa-pillar h4 {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.45rem;
+  font-weight: 600; font-style: italic;
+  color: var(--oa-bone); margin-bottom: .75rem;
+}
+.oa-pillar p { color: #b5a894; font-size: .98rem; }
+
+/* Lore strip */
+.oa-lore {
+  margin-top: 4rem; padding: 4rem 1.5rem;
+  text-align: center;
+  background: rgba(0,0,0,.3);
+  border-top: 1px solid rgba(232,137,58,.2);
+  border-bottom: 1px solid rgba(232,137,58,.2);
+}
+.oa-lore blockquote {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  max-width: 48ch; margin: 0 auto; color: var(--oa-bone);
+  line-height: 1.4;
+}
+.oa-lore cite {
+  display: block; margin-top: 1.5rem;
+  font-family: 'Cinzel', serif; letter-spacing: .35em;
+  font-size: .7rem; text-transform: uppercase;
+  color: var(--oa-ember); font-style: normal;
+}
+
+/* ---------- OBSIDIAN PRODUCT PAGE ---------- */
+.oa-product {
+  padding: 4rem 1.5rem;
+  border-top: 1px solid rgba(232,137,58,.2);
+}
+.oa-breadcrumb {
+  font-family: 'Cinzel', serif; font-size: .7rem;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--oa-smoke); margin-bottom: 2.5rem;
+}
+.oa-breadcrumb a { text-decoration: none; }
+.oa-breadcrumb span { color: var(--oa-ember); }
+
+.oa-prod-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start;
+}
+@media (max-width: 820px) { .oa-prod-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* Product visual */
+.oa-prod-img {
+  aspect-ratio: 1/1;
+  background:
+    radial-gradient(circle at center, rgba(232,137,58,.25), transparent 60%),
+    linear-gradient(180deg, #1a0f0a 0%, #0a0604 100%);
+  border: 1px solid rgba(232,137,58,.3);
+  position: relative;
+  overflow: hidden;
+}
+.oa-prod-img::before {
+  content: ""; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 60%; height: 60%;
+  border-radius: 50%;
+  border: 1px solid rgba(232,137,58,.4);
+  background:
+    radial-gradient(circle at 40% 40%, rgba(232,137,58,.5), rgba(168,90,31,.3) 60%, transparent 80%);
+}
+.oa-prod-img::after {
+  content: "◈"; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'Uncial Antiqua', serif;
+  font-size: clamp(4rem, 10vw, 7rem);
+  color: var(--oa-ember);
+  text-shadow: 0 0 40px rgba(232,137,58,.8);
+}
+.oa-prod-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin-top: .75rem; }
+.oa-prod-thumbs div {
+  aspect-ratio: 1/1;
+  background: linear-gradient(180deg, #1a0f0a 0%, #0a0604 100%);
+  border: 1px solid rgba(232,137,58,.3);
+  opacity: .6; cursor: pointer;
+  transition: opacity .2s, border-color .2s;
+}
+.oa-prod-thumbs div:first-child { opacity: 1; border-color: var(--oa-ember); }
+.oa-prod-thumbs div:hover { opacity: .95; }
+
+.oa-prod-info .rarity-pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: 'Cinzel', serif; font-size: .72rem;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--oa-ember); padding: .35rem .85rem;
+  border: 1px solid var(--oa-ember);
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+}
+.oa-prod-info .rarity-pill .d { width: 6px; height: 6px; background: var(--oa-ember); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+
+.oa-prod-info h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 400;
+  font-style: italic; line-height: 1.05;
+  color: var(--oa-bone); margin-bottom: .5rem;
+}
+.oa-prod-info h1 .accent { color: var(--oa-ember); font-family: 'Uncial Antiqua', serif; font-style: normal; }
+
+.oa-prod-info .byline {
+  color: var(--oa-smoke); margin-bottom: 1.5rem; font-style: italic;
+}
+
+.oa-prod-info .price-row {
+  display: flex; align-items: baseline; gap: 1rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(232,137,58,.2);
+  border-bottom: 1px solid rgba(232,137,58,.2);
+  margin-bottom: 1.5rem;
+}
+.oa-prod-info .price {
+  font-family: 'Cormorant Garamond', serif; font-weight: 600;
+  font-size: 2.25rem; color: var(--oa-bone);
+}
+.oa-prod-info .stock {
+  margin-left: auto; font-family: 'Cinzel', serif;
+  font-size: .7rem; letter-spacing: .25em; text-transform: uppercase;
+  color: #6bf090;
+}
+.oa-prod-info .stock .d { display: inline-block; width: 6px; height: 6px; background: #6bf090; border-radius: 50%; margin-right: .4rem; animation: pulse 2s infinite; }
+
+.oa-prod-info p.desc { margin-bottom: 1.5rem; color: #d0c4ae; font-size: 1.05rem; }
+
+/* Variant picker — rune-style chips */
+.oa-var { margin-bottom: 1.5rem; }
+.oa-var .label {
+  font-family: 'Cinzel', serif; font-size: .72rem;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--oa-smoke); margin-bottom: .6rem;
+}
+.oa-var .opts { display: flex; gap: .5rem; flex-wrap: wrap; }
+.oa-var .opts label {
+  padding: .65rem 1.25rem;
+  border: 1px solid rgba(232,137,58,.4);
+  background: rgba(232,137,58,.05);
+  font-family: 'Cinzel', serif; font-size: .78rem;
+  letter-spacing: .15em; color: var(--oa-bone);
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.oa-var .opts label.chosen { background: var(--oa-ember); color: var(--oa-ink); border-color: var(--oa-ember); }
+.oa-var .opts label:hover { border-color: var(--oa-ember); }
+
+.oa-actions { display: flex; gap: .75rem; margin-bottom: 1.5rem; }
+.oa-qty {
+  display: inline-flex; align-items: center;
+  border: 1px solid rgba(232,137,58,.4);
+  font-family: 'Cinzel', serif;
+}
+.oa-qty button { padding: 0 1rem; font-size: 1.1rem; color: var(--oa-bone); }
+.oa-qty span { padding: .9rem 1rem; border-left: 1px solid rgba(232,137,58,.4); border-right: 1px solid rgba(232,137,58,.4); min-width: 3rem; text-align: center; }
+.oa-actions .oa-cta { flex: 1; justify-content: center; }
+
+.oa-spec {
+  margin-top: 1.5rem; padding: 1.5rem;
+  background: rgba(232,137,58,.05);
+  border: 1px solid rgba(232,137,58,.15);
+}
+.oa-spec h5 { font-family: 'Cinzel', serif; font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--oa-ember); margin-bottom: .85rem; }
+.oa-spec dl { display: grid; grid-template-columns: auto 1fr; gap: .4rem 1.5rem; font-size: .95rem; }
+.oa-spec dt { color: var(--oa-smoke); font-family: 'Cinzel', serif; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; }
+.oa-spec dd { color: var(--oa-bone); }
+
+/* =========================================================================
+   CONCEPT 01 — EDITORIAL MINIMAL (was concept 01 before)
+   ========================================================================= */
+.c01 {
+  --c01-bg: #f5f1ea;
+  --c01-ink: #1a1a18;
+  --c01-muted: #6f6a5f;
+  --c01-accent: #b8472a;
+
+  background: var(--c01-bg); color: var(--c01-ink);
+  font-family: 'Inter', sans-serif;
+  padding: 6rem 1.5rem;
+}
+.c01 .wrap { max-width: 1200px; margin: 0 auto; }
+.c01 .meta-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 2rem; border-bottom: 1px solid var(--c01-ink);
+  margin-bottom: 4rem;
+  font-family: 'Space Mono', monospace; font-size: .7rem;
+  letter-spacing: .3em; text-transform: uppercase;
+  gap: 1rem; flex-wrap: wrap;
+}
+.c01 .meta-row .issue { color: var(--c01-accent); }
+.c01 .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+@media (max-width: 820px) { .c01 .hero { grid-template-columns: 1fr; gap: 3rem; } }
+.c01 .hero h2 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(3rem, 6vw, 5.5rem); line-height: .95; letter-spacing: -.02em; }
+.c01 .hero h2 em { font-style: italic; font-weight: 400; color: var(--c01-accent); }
+.c01 .hero .col-right p { font-size: 1.05rem; margin-bottom: 1.25rem; color: var(--c01-muted); max-width: 42ch; }
+.c01 .hero .col-right p:first-child { color: var(--c01-ink); font-size: 1.2rem; font-family: 'Fraunces', serif; font-weight: 400; }
+.c01-cta {
+  display: inline-flex; align-items: center; gap: .75rem;
+  margin-top: 1.5rem; font-family: 'Inter', sans-serif; font-weight: 500;
+  font-size: .85rem; letter-spacing: .2em; text-transform: uppercase;
+  padding: 1rem 2.5rem; background: var(--c01-ink); color: var(--c01-bg);
+  text-decoration: none; transition: background .2s;
+}
+.c01-cta:hover { background: var(--c01-accent); }
+.c01-cta::after { content: "→"; }
+.c01 .hero-img {
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, rgba(184,71,42,.3), transparent 50%), linear-gradient(180deg, #c9b896 0%, #9d8668 100%);
+  position: relative; overflow: hidden;
+}
+.c01 .hero-img::after {
+  content: "SS'26 / Nº4 / The Atelier Edit";
+  position: absolute; left: 1.25rem; bottom: 1.25rem;
+  writing-mode: vertical-rl;
+  font-family: 'Space Mono', monospace; font-size: .7rem;
+  letter-spacing: .35em; text-transform: uppercase;
+  color: rgba(245,241,234,.85);
+}
+.c01 .hero-img::before {
+  content: "01"; position: absolute; top: 1.25rem; right: 1.25rem;
+  font-family: 'Fraunces', serif; font-size: 5rem; font-style: italic;
+  font-weight: 300; color: rgba(245,241,234,.6); line-height: 1;
+}
+.c01 .features {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;
+  margin-top: 7rem; padding-top: 5rem; border-top: 1px solid var(--c01-ink);
+}
+@media (max-width: 780px) { .c01 .features { grid-template-columns: 1fr; gap: 2.5rem; } }
+.c01 .feat .num { font-family: 'Space Mono', monospace; font-size: .7rem; letter-spacing: .3em; color: var(--c01-accent); margin-bottom: 1rem; }
+.c01 .feat h4 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.6rem; margin-bottom: .75rem; line-height: 1.2; }
+.c01 .feat p { color: var(--c01-muted); font-size: .98rem; }
+
+/* =========================================================================
+   CONCEPT 02 — BRUTALIST STREETWEAR
+   ========================================================================= */
+.c02 {
+  background: #ff4a1c; color: #0a0a0a;
+  font-family: 'Space Mono', monospace;
+  padding: 5rem 1.5rem;
+  position: relative; overflow: hidden;
+}
+.c02::before {
+  content: "SHOP/DROP/SHOP/DROP/SHOP";
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(4rem, 15vw, 12rem);
+  color: rgba(10,10,10,.08); white-space: nowrap; pointer-events: none;
+}
+.c02 .wrap { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.c02 .tag-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .15em; }
+.c02 .tag-row span { padding: .35rem .75rem; background: #0a0a0a; color: #ff4a1c; }
+.c02 .tag-row span:nth-child(2) { background: #ff4a1c; color: #0a0a0a; border: 2px solid #0a0a0a; }
+.c02 h2 { font-family: 'Archivo Black', sans-serif; font-size: clamp(3rem, 10vw, 8rem); line-height: .85; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.c02 h2 .outline { -webkit-text-stroke: 2px #0a0a0a; color: transparent; }
+.c02 .price-drop { display: inline-block; transform: rotate(-3deg); background: #0a0a0a; color: #ff4a1c; padding: .4rem 1rem; font-size: clamp(2rem, 5vw, 3.5rem); font-family: 'Archivo Black', sans-serif; margin: .5rem 0 1rem; }
+.c02 .lede { max-width: 45ch; font-size: 1rem; margin-bottom: 2rem; font-weight: 700; }
+.c02-cta {
+  display: inline-block; padding: 1.25rem 3rem;
+  background: #0a0a0a; color: #ff4a1c;
+  font-family: 'Archivo Black', sans-serif; font-size: 1.1rem; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; border: 3px solid #0a0a0a;
+  transition: transform .1s, background .1s, color .1s, box-shadow .1s;
+  box-shadow: 8px 8px 0 #0a0a0a;
+}
+.c02-cta:hover { background: #ff4a1c; color: #0a0a0a; transform: translate(-3px,-3px); box-shadow: 11px 11px 0 #0a0a0a; }
+.c02 .drops { margin-top: 5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media (max-width: 780px) { .c02 .drops { grid-template-columns: 1fr; } }
+.c02 .drop { background: #0a0a0a; color: #ff4a1c; padding: 1.5rem; border: 3px solid #0a0a0a; }
+.c02 .drop:nth-child(2) { transform: translateY(20px); background: #ff4a1c; color: #0a0a0a; }
+.c02 .drop:nth-child(3) { transform: translateY(-10px); }
+.c02 .drop .num { font-family: 'Archivo Black', sans-serif; font-size: 3rem; line-height: 1; margin-bottom: .5rem; }
+.c02 .drop h4 { font-size: 1rem; margin-bottom: .5rem; text-transform: uppercase; letter-spacing: .1em; }
+.c02 .drop p { font-size: .85rem; opacity: .8; }
+.c02 .drop .sold { display: inline-block; margin-top: 1rem; font-size: .7rem; letter-spacing: .2em; padding: .25rem .5rem; border: 1px solid currentColor; }
+
+/* =========================================================================
+   CONCEPT 03 — ORGANIC / WELLNESS
+   ========================================================================= */
+.c03 {
+  background: #ebe7dd; color: #2a3528;
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  padding: 6rem 1.5rem; position: relative;
+}
+.c03 .wrap { max-width: 1200px; margin: 0 auto; }
+.c03 .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+@media (max-width: 820px) { .c03 .hero { grid-template-columns: 1fr; gap: 3rem; } }
+.c03 .kicker { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #6b7a52; margin-bottom: .5rem; transform: rotate(-2deg); display: inline-block; }
+.c03 h2 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(2.5rem, 5vw, 4.25rem); line-height: 1.05; letter-spacing: -.02em; color: #2a3528; }
+.c03 h2 em { font-style: italic; color: #6b7a52; }
+.c03 .lede { margin-top: 1.5rem; max-width: 42ch; font-size: 1.05rem; color: #556250; }
+.c03-cta {
+  display: inline-flex; align-items: center; gap: .75rem;
+  margin-top: 2rem; padding: 1rem 2rem; border-radius: 100px;
+  background: #2a3528; color: #ebe7dd;
+  font-size: .85rem; letter-spacing: .15em; text-transform: uppercase; font-weight: 500;
+  text-decoration: none; transition: background .2s, transform .2s;
+}
+.c03-cta:hover { background: #6b7a52; transform: translateY(-2px); }
+.c03 .visual { aspect-ratio: 1/1; max-width: 500px; margin: 0 auto; position: relative; }
+.c03 .visual .circle { position: absolute; inset: 10%; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #c9d4a8, #8a9668 70%); }
+.c03 .visual .leaf { position: absolute; width: 60%; height: 60%; top: 5%; left: 20%; background: linear-gradient(160deg, #6b7a52, #3d4a2f); border-radius: 0 100% 0 100%; transform: rotate(20deg); opacity: .85; }
+.c03 .visual .leaf-2 { position: absolute; width: 45%; height: 45%; bottom: 8%; right: 8%; background: linear-gradient(160deg, #8a9668, #556250); border-radius: 100% 0 100% 0; transform: rotate(-15deg); opacity: .75; }
+.c03 .visual .dot { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #b8472a; }
+.c03 .visual .dot-1 { top: 15%; right: 20%; }
+.c03 .visual .dot-2 { bottom: 30%; left: 15%; opacity: .6; }
+.c03 .ingredients { margin-top: 7rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+@media (max-width: 820px) { .c03 .ingredients { grid-template-columns: repeat(2, 1fr); } }
+.c03 .ing { text-align: center; padding: 2rem 1rem; background: rgba(255,255,255,.4); border-radius: 16px; }
+.c03 .ing .symbol { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 1rem; background: #6b7a52; color: #ebe7dd; display: grid; place-items: center; font-family: 'Fraunces', serif; font-size: 1.3rem; font-style: italic; }
+.c03 .ing h5 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.15rem; margin-bottom: .25rem; }
+.c03 .ing p { font-size: .85rem; color: #556250; }
+
+/* =========================================================================
+   CONCEPT 04 — TECH / SAAS
+   ========================================================================= */
+.c04 {
+  background: #08080c; color: #f0f0f5;
+  font-family: 'Inter', sans-serif;
+  padding: 6rem 1.5rem; position: relative; overflow: hidden;
+}
+.c04::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(120,140,220,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(120,140,220,.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+}
+.c04::after {
+  content: ""; position: absolute;
+  top: 20%; right: -200px; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(100,120,240,.35), transparent 60%);
+  pointer-events: none;
+}
+.c04 .wrap { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.c04 .pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .4rem .9rem;
+  background: rgba(120,140,220,.1); color: #a0b0f0;
+  border: 1px solid rgba(120,140,220,.25); border-radius: 100px;
+  font-size: .78rem; font-weight: 500; letter-spacing: .05em; margin-bottom: 2rem;
+}
+.c04 .pill .dot { width: 6px; height: 6px; background: #6bf090; border-radius: 50%; }
+.c04 h2 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(2.5rem, 6vw, 4.75rem); line-height: 1.05; letter-spacing: -.03em; max-width: 18ch; margin-bottom: 1.5rem; }
+.c04 h2 .grad { background: linear-gradient(135deg, #a0b0f0, #6bf090); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.c04 .lede { max-width: 55ch; font-size: 1.15rem; color: #9898a5; font-weight: 300; margin-bottom: 2.5rem; }
+.c04-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.c04-cta { padding: .9rem 1.75rem; background: #f0f0f5; color: #08080c; border-radius: 8px; font-weight: 600; font-size: .95rem; text-decoration: none; transition: transform .15s; }
+.c04-cta:hover { transform: translateY(-1px); }
+.c04-cta.ghost { background: transparent; color: #f0f0f5; border: 1px solid rgba(240,240,245,.2); }
+.c04-cta.ghost:hover { border-color: #f0f0f5; }
+.c04 .specs { margin-top: 6rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(120,140,220,.15); border: 1px solid rgba(120,140,220,.15); border-radius: 12px; overflow: hidden; }
+@media (max-width: 780px) { .c04 .specs { grid-template-columns: 1fr; } }
+.c04 .spec { padding: 2rem 1.75rem; background: #08080c; }
+.c04 .spec .big { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 2.75rem; line-height: 1; letter-spacing: -.02em; background: linear-gradient(135deg, #fff, #a0b0f0); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: .5rem; }
+.c04 .spec h5 { font-size: .95rem; font-weight: 600; margin-bottom: .35rem; }
+.c04 .spec p { font-size: .88rem; color: #9898a5; font-weight: 300; }
+
+/* =========================================================================
+   CONCEPT 05 — VINTAGE / HERITAGE
+   ========================================================================= */
+.c05 {
+  --c05-cream: #f1e4c8;
+  --c05-amber: #9a5d1f;
+  --c05-dark:  #2a1a0e;
+  --c05-red:   #7a1a1a;
+  background: var(--c05-cream); color: var(--c05-dark);
+  font-family: 'Fraunces', Georgia, serif;
+  padding: 5rem 1.5rem; position: relative;
+}
+.c05 .wrap { max-width: 1100px; margin: 0 auto; }
+.c05 .letterhead { text-align: center; padding-bottom: 2.5rem; border-bottom: 3px double var(--c05-dark); margin-bottom: 4rem; }
+.c05 .letterhead .emblem { width: 60px; height: 60px; border: 2px solid var(--c05-dark); border-radius: 50%; display: inline-grid; place-items: center; font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+.c05 .letterhead .est { font-family: 'IM Fell English SC', serif; font-size: .85rem; letter-spacing: .3em; color: var(--c05-amber); }
+.c05 .hero { text-align: center; }
+.c05 .hero h2 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05; margin-bottom: 1rem; max-width: 20ch; margin-left: auto; margin-right: auto; }
+.c05 .hero h2 .italic { font-style: italic; color: var(--c05-red); }
+.c05 .hero .tagline { font-family: 'IM Fell English SC', serif; font-size: .85rem; letter-spacing: .35em; color: var(--c05-amber); margin-bottom: 1.5rem; }
+.c05 .hero p { max-width: 50ch; margin: 0 auto 2rem; font-size: 1.1rem; font-style: italic; color: #544030; }
+.c05-cta { display: inline-block; padding: 1rem 2.5rem; background: var(--c05-dark); color: var(--c05-cream); font-family: 'IM Fell English SC', serif; font-size: .95rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--c05-dark); transition: background .2s, color .2s, border-color .2s; }
+.c05-cta:hover { background: var(--c05-red); border-color: var(--c05-red); }
+.c05 .pillars { margin-top: 6rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; padding: 3rem 0; border-top: 1px solid var(--c05-amber); border-bottom: 1px solid var(--c05-amber); }
+@media (max-width: 780px) { .c05 .pillars { grid-template-columns: 1fr; gap: 2.5rem; } }
+.c05 .pillar { text-align: center; padding: 0 1rem; }
+.c05 .pillar .roman { font-family: 'DM Serif Display', serif; font-size: 2.5rem; font-style: italic; color: var(--c05-amber); margin-bottom: .75rem; }
+.c05 .pillar h5 { font-size: 1.25rem; margin-bottom: .5rem; font-weight: 600; }
+.c05 .pillar p { font-size: .95rem; color: #544030; }
+.c05 .stamp { position: absolute; top: 3rem; right: 3rem; width: 110px; height: 110px; border: 2px solid var(--c05-red); border-radius: 50%; display: grid; place-items: center; transform: rotate(-15deg); color: var(--c05-red); font-family: 'IM Fell English SC', serif; font-size: .7rem; letter-spacing: .15em; text-align: center; line-height: 1.4; opacity: .8; }
+.c05 .stamp::before { content: ""; position: absolute; inset: 6px; border: 1px dashed var(--c05-red); border-radius: 50%; }
+@media (max-width: 780px) { .c05 .stamp { display: none; } }
+
+/* =========================================================================
+   CONCEPT 06 — PLAYFUL Y2K / CANDY
+   ========================================================================= */
+.c06 {
+  background: linear-gradient(135deg, #ffd1f5 0%, #a5e8ff 100%);
+  color: #2a1a4a;
+  font-family: 'Syne', sans-serif;
+  padding: 5rem 1.5rem; position: relative; overflow: hidden;
+}
+.c06::before { content: "✦"; position: absolute; top: 10%; left: 5%; font-size: 4rem; color: rgba(255,255,255,.6); animation: spin 20s linear infinite; }
+.c06::after { content: "❋"; position: absolute; bottom: 15%; right: 8%; font-size: 5rem; color: rgba(255,255,255,.5); animation: spin 30s linear infinite reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.c06 .wrap { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.c06 .badge { display: inline-block; padding: .5rem 1rem; background: #ffe94a; color: #2a1a4a; border: 3px solid #2a1a4a; border-radius: 100px; font-weight: 800; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; transform: rotate(-3deg); box-shadow: 4px 4px 0 #2a1a4a; margin-bottom: 1.5rem; }
+.c06 h2 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.75rem, 8vw, 6rem); line-height: .9; letter-spacing: -.02em; text-transform: uppercase; max-width: 14ch; }
+.c06 h2 .glow { background: linear-gradient(135deg, #ff4aa0, #4a7aff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.c06 .lede { max-width: 45ch; margin: 1.5rem 0 2rem; font-size: 1.15rem; font-weight: 400; color: #3a2a5a; }
+.c06-cta { display: inline-block; padding: 1.25rem 2.5rem; background: #2a1a4a; color: #fff; border-radius: 100px; font-weight: 800; font-size: 1rem; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; box-shadow: 6px 6px 0 #ff4aa0; transition: transform .15s, box-shadow .15s; }
+.c06-cta:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 #ff4aa0; }
+.c06 .bubbles { margin-top: 5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+@media (max-width: 780px) { .c06 .bubbles { grid-template-columns: 1fr; } }
+.c06 .bubble { background: rgba(255,255,255,.7); backdrop-filter: blur(8px); border: 2px solid #2a1a4a; border-radius: 28px; padding: 2rem 1.5rem; text-align: center; transition: transform .2s; }
+.c06 .bubble:hover { transform: translateY(-6px) rotate(-1deg); }
+.c06 .bubble:nth-child(2) { transform: translateY(-10px); background: rgba(255,233,74,.8); }
+.c06 .bubble:nth-child(2):hover { transform: translateY(-16px) rotate(1deg); }
+.c06 .bubble .emoji { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+.c06 .bubble h5 { font-weight: 800; font-size: 1.1rem; margin-bottom: .5rem; text-transform: uppercase; }
+.c06 .bubble p { font-size: .9rem; color: #3a2a5a; font-weight: 400; }
+.c06 .bubble .price { margin-top: 1rem; display: inline-block; padding: .35rem .9rem; background: #2a1a4a; color: #fff; border-radius: 100px; font-size: .85rem; font-weight: 700; }
+
+/* =========================================================================
+   BOOTHCRM CASE STUDY
+   ========================================================================= */
+.bcrm {
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(107,240,144,.1), transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(160,176,240,.08), transparent 50%),
+    #0c0e12;
+  color: #e4e7ec;
+  font-family: 'Inter', sans-serif;
+  padding: 6rem 1.5rem;
+  position: relative;
+}
+.bcrm .wrap { max-width: 1200px; margin: 0 auto; }
+
+.bcrm .case-head {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 2.5rem; flex-wrap: wrap;
+}
+.bcrm .tag {
+  font-family: 'JetBrains Mono', monospace; font-size: .72rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  padding: .4rem .85rem;
+  background: rgba(107,240,144,.1); color: #6bf090;
+  border: 1px solid rgba(107,240,144,.3); border-radius: 4px;
+}
+.bcrm .tag.live::before {
+  content: "●"; margin-right: .4rem; animation: pulse 2s infinite;
+}
+.bcrm .tag.stack {
+  color: #a0b0f0; background: rgba(160,176,240,.1);
+  border-color: rgba(160,176,240,.3);
+}
+
+.bcrm .case-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem;
+  align-items: start;
+}
+@media (max-width: 880px) { .bcrm .case-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+.bcrm .logo-row {
+  display: flex; align-items: center; gap: .75rem;
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 1.1rem; letter-spacing: .05em;
+  color: #fafafa; margin-bottom: 1rem;
+}
+.bcrm .hex {
+  display: inline-grid; place-items: center;
+  width: 32px; height: 32px;
+  color: #6bf090;
+}
+.bcrm h2 {
+  font-family: 'Fraunces', serif; font-weight: 300;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.05; letter-spacing: -.02em;
+  margin-bottom: 1.25rem; color: #fafafa;
+}
+.bcrm h2 em { font-style: italic; color: #6bf090; }
+.bcrm .bcrm-lede {
+  font-size: 1.1rem; color: #b5bac2; font-weight: 300;
+  margin-bottom: 2rem; max-width: 52ch;
+}
+
+.bcrm .role-line {
+  display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.5rem;
+  padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  font-size: .92rem;
+}
+.bcrm .role-line dt {
+  font-family: 'JetBrains Mono', monospace; font-size: .72rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: #8a8e96;
+}
+.bcrm .role-line dd { color: #e4e7ec; }
+
+.bcrm .bcrm-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+.bcrm-cta {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .9rem 1.6rem;
+  background: #6bf090; color: #0c0e12;
+  border-radius: 8px; font-weight: 600; font-size: .9rem;
+  text-decoration: none;
+  transition: transform .15s, background .15s;
+}
+.bcrm-cta::after { content: "↗"; font-size: 1.1rem; }
+.bcrm-cta:hover { background: #fafafa; transform: translateY(-1px); }
+.bcrm-cta.ghost {
+  background: transparent; color: #e4e7ec;
+  border: 1px solid rgba(255,255,255,.18);
+}
+.bcrm-cta.ghost:hover { border-color: #fff; background: rgba(255,255,255,.05); }
+.bcrm-cta.ghost::after { content: "→"; }
+
+/* Mock app window */
+.bcrm-mock {
+  background: #14171c;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  font-family: 'JetBrains Mono', monospace;
+}
+.bcrm-mock .bar {
+  padding: .75rem 1rem;
+  background: #1c2027;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center; gap: .5rem;
+}
+.bcrm-mock .bar .dots { display: flex; gap: .35rem; }
+.bcrm-mock .bar .dots span { width: 10px; height: 10px; border-radius: 50%; background: #3a3e46; }
+.bcrm-mock .bar .dots span:nth-child(1) { background: #ff6058; }
+.bcrm-mock .bar .dots span:nth-child(2) { background: #ffbe2f; }
+.bcrm-mock .bar .dots span:nth-child(3) { background: #2aca43; }
+.bcrm-mock .bar .url {
+  flex: 1; font-size: .72rem; color: #8a8e96;
+  background: #0c0e12; padding: .35rem .75rem;
+  border-radius: 4px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.bcrm-mock .app-nav {
+  padding: .75rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex; gap: 1rem; align-items: center;
+  font-family: 'Inter', sans-serif; font-size: .78rem;
+  color: #8a8e96;
+}
+.bcrm-mock .app-nav .brand {
+  display: flex; align-items: center; gap: .4rem;
+  font-weight: 700; color: #fafafa; margin-right: .5rem;
+}
+.bcrm-mock .app-nav .brand svg { width: 18px; height: 18px; }
+.bcrm-mock .app-nav span.active { color: #6bf090; }
+
+.bcrm-mock .app-body {
+  padding: 1.25rem;
+  font-family: 'Inter', sans-serif;
+}
+.bcrm-mock .app-body h3 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 1.4rem; color: #fafafa;
+  margin-bottom: .35rem;
+}
+.bcrm-mock .app-body .count {
+  font-size: .78rem; color: #8a8e96; margin-bottom: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.bcrm-mock .filters {
+  display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1rem;
+}
+.bcrm-mock .filters span {
+  font-size: .68rem; padding: .25rem .55rem;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 4px; color: #b5bac2;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: .05em;
+}
+.bcrm-mock .filters span.on { background: rgba(107,240,144,.15); color: #6bf090; border-color: rgba(107,240,144,.3); }
+
+.bcrm-mock table {
+  width: 100%; font-size: .78rem; border-collapse: collapse;
+}
+.bcrm-mock table th {
+  text-align: left; padding: .5rem .5rem;
+  font-family: 'JetBrains Mono', monospace; font-size: .68rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: #8a8e96; font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.bcrm-mock table td {
+  padding: .6rem .5rem;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  color: #d4d7dc;
+}
+.bcrm-mock table td.name { color: #fafafa; font-weight: 500; }
+.bcrm-mock .stage {
+  padding: .2rem .5rem; font-size: .68rem;
+  border-radius: 3px; font-family: 'JetBrains Mono', monospace;
+  letter-spacing: .05em;
+}
+.bcrm-mock .stage.won { background: rgba(107,240,144,.12); color: #6bf090; }
+.bcrm-mock .stage.neg { background: rgba(232,137,58,.12); color: #f1a86a; }
+.bcrm-mock .stage.prop { background: rgba(160,176,240,.12); color: #a0b0f0; }
+.bcrm-mock .stage.int { background: rgba(200,200,210,.08); color: #b5bac2; }
+
+/* Features list below the mock */
+.bcrm-features {
+  margin-top: 5rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px; overflow: hidden;
+}
+@media (max-width: 820px) { .bcrm-features { grid-template-columns: 1fr; } }
+.bcrm-features .bf {
+  padding: 2rem 1.75rem; background: #0c0e12;
+}
+.bcrm-features .bf .sym {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(107,240,144,.4);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: #6bf090; margin-bottom: 1rem;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700;
+}
+.bcrm-features .bf h4 { font-size: 1.05rem; font-weight: 600; color: #fafafa; margin-bottom: .5rem; }
+.bcrm-features .bf p { color: #8a8e96; font-size: .92rem; font-weight: 300; }
+
+/* =========================================================================
+   DOCS
+   ========================================================================= */
+.docs {
+  padding: 5rem 1.5rem; background: #08080c; color: #e8e8ea;
+  border-top: 1px solid #23232a;
+}
+.docs .wrap { max-width: 880px; margin: 0 auto; }
+.docs h2 {
+  font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 300;
+  text-align: center; color: #f0c878; margin-bottom: .5rem;
+}
+.docs h2 em { font-style: italic; }
+.docs .subtitle {
+  text-align: center; font-family: 'Space Mono', monospace;
+  letter-spacing: .35em; font-size: .72rem; text-transform: uppercase;
+  color: #8a8a94; margin-bottom: 3rem;
+}
+.docs h3 {
+  font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 400;
+  color: #f0c878; margin: 2.5rem 0 1rem;
+  padding-bottom: .5rem; border-bottom: 1px solid #23232a;
+}
+.docs h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; color: #fafafa; margin: 1.5rem 0 .5rem; }
+.docs p { margin-bottom: 1rem; color: #b5b5bf; font-weight: 300; }
+.docs ul { margin: 0 0 1rem 1.5rem; color: #b5b5bf; font-weight: 300; }
+.docs ul li { margin-bottom: .5rem; }
+.docs code { background: #141418; padding: .15rem .45rem; border: 1px solid #23232a; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: #f0c878; }
+.docs strong { color: #fafafa; font-weight: 600; }
+
+footer.sig {
+  padding: 2.5rem 1.5rem; text-align: center;
+  background: #08080c; color: #6a6a74;
+  font-family: 'Space Mono', monospace; font-size: .7rem; letter-spacing: .3em; text-transform: uppercase;
+  border-top: 1px solid #23232a;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================= NAV ============================= -->
+<nav class="pf-nav" aria-label="Portfolio sections">
+  <span class="brand">Andy Perciballi</span>
+  <a href="#cover">Intro</a>
+  <a href="#tavern">Tavern</a>
+  <a href="#obsidian">Obsidian</a>
+  <a href="#c01">Editorial</a>
+  <a href="#c02">Brutalist</a>
+  <a href="#c03">Organic</a>
+  <a href="#c04">Tech</a>
+  <a href="#c05">Heritage</a>
+  <a href="#c06">Playful</a>
+  <a href="#boothcrm" class="live">BoothCRM</a>
+  <a href="#docs">Notes</a>
+</nav>
+
+<!-- ============================= COVER ============================= -->
+<section id="cover" class="pf-cover">
+  <p class="small-label">PageFly · Shopify · Portfolio</p>
+  <h1>Eight ways to <em>sell</em>. One CRM that ships.</h1>
+  <p class="lede">A collection of Shopify landing-page concepts built for PageFly — including two D&amp;D-specific directions with product pages — plus a live, full-stack CRM I designed and built. Range up top, depth at the bottom.</p>
+  <div class="index" aria-label="Portfolio index">
+    <a href="#tavern" class="hilite"><span>A · D&amp;D</span>Tavern Parchment</a>
+    <a href="#obsidian" class="hilite"><span>B · D&amp;D</span>Obsidian Arcane</a>
+    <a href="#c01"><span>01</span>Editorial</a>
+    <a href="#c02"><span>02</span>Brutalist</a>
+    <a href="#c03"><span>03</span>Organic</a>
+    <a href="#c04"><span>04</span>Tech</a>
+    <a href="#c05"><span>05</span>Heritage</a>
+    <a href="#c06"><span>06</span>Playful</a>
+    <a href="#boothcrm"><span>LIVE</span>BoothCRM</a>
+  </div>
+</section>
+
+<!-- ============================= A · TAVERN PARCHMENT (D&D) ============================= -->
+<div class="concept-label">
+  <span><span class="num">A</span> &nbsp; Tavern Parchment — D&amp;D Landing + Product</span>
+  <span class="tag">For: D&amp;D subscription boxes · TTRPG stores · adventure modules</span>
+</div>
+
+<section id="tavern" class="ta">
+
+  <!-- Landing view -->
+  <div class="ta-landing">
+    <div class="ta-wrap">
+      <span class="ta-view">View 1 · Landing Page</span>
+
+      <div class="ta-hero">
+        <span class="kicker">◆ Roll for Initiative ◆</span>
+        <h2>Your next <span class="crimson">adventure</span><br>arrives monthly.</h2>
+        <p class="sub">A complete 5e module, two exclusive resin minis, and tabletop-ready battle maps — shipped to your door. No prep. No blank page. Just gather the party.</p>
+        <a href="#" class="ta-cta">Subscribe &amp; begin</a>
+        <span class="ta-cta-note">First box ships in 3–5 days · Cancel anytime</span>
+      </div>
+
+      <div class="ta-stats">
+        <h3>What's in the Box</h3>
+        <div class="ta-stat-grid">
+          <div class="ta-stat-card">
+            <div class="stat-type">Adventure Booklet</div>
+            <h4>A Full Module</h4>
+            <p>60+ pages of fully statted encounters, NPCs, and lore. Written for GMs who'd rather play than plan.</p>
+            <div class="stat-line">CR · Levels 1–10 arc</div>
+          </div>
+          <div class="ta-stat-card">
+            <div class="stat-type">Exclusive Minis</div>
+            <h4>Two Resin Figures</h4>
+            <p>Hand-cast monsters and NPCs you can't get anywhere else — a new pair every month.</p>
+            <div class="stat-line">AC · Hand-cast resin</div>
+          </div>
+          <div class="ta-stat-card">
+            <div class="stat-type">Battle Maps</div>
+            <h4>24×18" Encounter Maps</h4>
+            <p>Full-scale, table-ready maps. Roll them out, drop your minis, fight.</p>
+            <div class="stat-line">HP · Tear-resistant stock</div>
+          </div>
+          <div class="ta-stat-card">
+            <div class="stat-type">Digital Dungeon</div>
+            <h4>VTT-Ready Files</h4>
+            <p>Every map, token, and ambient soundtrack bundled for Roll20, Foundry, and Fantasy Grounds.</p>
+            <div class="stat-line">INT · Free with subscription</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ta-scroll">
+        <blockquote>It takes out a lot of the hardest work for a GM, but leaves room for the GM to make the world their own.</blockquote>
+        <cite>— Verified Subscriber</cite>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product page view -->
+  <div class="ta-product">
+    <div class="ta-wrap">
+      <span class="ta-view">View 2 · Product Page</span>
+
+      <div class="ta-breadcrumb">
+        <a href="#">Shop</a> &nbsp;›&nbsp; <a href="#">Adventure Boxes</a> &nbsp;›&nbsp; <span>Box 07 · The Fallen Star</span>
+      </div>
+
+      <div class="ta-prod-grid">
+        <div>
+          <div class="ta-prod-img" aria-hidden="true"></div>
+          <div class="ta-prod-thumbs" aria-hidden="true">
+            <div></div><div></div><div></div><div></div>
+          </div>
+        </div>
+
+        <div class="ta-prod-info">
+          <span class="rarity">★ Most Popular</span>
+          <h1>Box 07 · The Fallen Star</h1>
+          <p class="subtitle">Part seven of the <em>Voyage of the Fallen Star</em> arc. Playable standalone.</p>
+
+          <div class="price-row">
+            <span class="price">$39</span>
+            <span class="price-was">$49</span>
+            <span class="ship">Ships in 3–5 days</span>
+          </div>
+
+          <p class="desc">Your party arrives at the crater where the star fell. Something is already there, picking through the wreckage — and it has more hands than it should. A tense, moderate-difficulty one-shot with roleplay hooks for continuing the full arc.</p>
+
+          <div class="ta-variants">
+            <div class="label">Plan</div>
+            <div class="opts">
+              <label class="chosen">Single Box</label>
+              <label>Monthly · Save 10%</label>
+              <label>Annual · Save 15%</label>
+            </div>
+          </div>
+
+          <div class="ta-variants">
+            <div class="label">Level Range</div>
+            <div class="opts">
+              <label>Levels 1–4</label>
+              <label class="chosen">Levels 5–8</label>
+              <label>Levels 9–12</label>
+            </div>
+          </div>
+
+          <div class="ta-qty-row">
+            <div class="ta-qty">
+              <button aria-label="Decrease quantity">−</button>
+              <span>1</span>
+              <button aria-label="Increase quantity">+</button>
+            </div>
+            <a href="#" class="ta-cta">Add to cart</a>
+          </div>
+
+          <div class="ta-includes">
+            <h5>This box includes</h5>
+            <ul>
+              <li>64-page adventure booklet, spiral-bound</li>
+              <li>Two exclusive resin minis (Crater Wraith, Star-Touched NPC)</li>
+              <li>Two 24×18" tear-resistant battle maps</li>
+              <li>Digital VTT bundle (Roll20 · Foundry · Fantasy Grounds)</li>
+              <li>Ambient soundtrack &amp; read-aloud audio</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= B · OBSIDIAN ARCANE (D&D dark) ============================= -->
+<div class="concept-label">
+  <span><span class="num">B</span> &nbsp; Obsidian Arcane — D&amp;D Landing + Product</span>
+  <span class="tag">For: high-end dice · metal sets · spellbooks · collector gear</span>
+</div>
+
+<section id="obsidian" class="oa">
+
+  <!-- Landing view -->
+  <div class="oa-landing">
+    <div class="oa-wrap">
+      <span class="oa-view">View 1 · Landing Page</span>
+
+      <div class="oa-hero">
+        <div class="rune-ring" aria-hidden="true"></div>
+        <span class="kicker">By Candlelight, Only</span>
+        <h2>For the ones who <span class="ember">roll in silence.</span></h2>
+        <p class="sub">Hand-forged dice, bound codices, and curiosities for the serious player. Made in small numbers. Sold by the full moon.</p>
+        <a href="#" class="oa-cta">Enter the vault</a>
+        <span class="oa-cta-sub">Next opening · 12 days</span>
+      </div>
+
+      <div class="oa-pillars">
+        <div class="oa-pillar">
+          <div class="rune" aria-hidden="true">ᚠ</div>
+          <h4>Forged by hand</h4>
+          <p>Each die poured, tumbled, and inked in a single studio. No two are perfectly identical. That's the point.</p>
+        </div>
+        <div class="oa-pillar">
+          <div class="rune" aria-hidden="true">ᚱ</div>
+          <h4>Released in moons</h4>
+          <p>A new collection every lunar cycle. When they're gone, the next full moon brings something else entirely.</p>
+        </div>
+        <div class="oa-pillar">
+          <div class="rune" aria-hidden="true">ᛉ</div>
+          <h4>Sealed for the table</h4>
+          <p>Every set arrives in a signed wooden box with a lore card. Made to be opened at the start of a session.</p>
+        </div>
+      </div>
+
+      <div class="oa-lore">
+        <blockquote>"They came wrapped in linen, in a box that smelled faintly of cedar. My players went quiet when I set them down."</blockquote>
+        <cite>— A Buyer, Seventh Moon</cite>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product page view -->
+  <div class="oa-product">
+    <div class="oa-wrap">
+      <span class="oa-view">View 2 · Product Page</span>
+
+      <div class="oa-breadcrumb">
+        <a href="#">Vault</a> &nbsp;›&nbsp; <a href="#">Dice Sets</a> &nbsp;›&nbsp; <span>Emberforged · Seventh Moon</span>
+      </div>
+
+      <div class="oa-prod-grid">
+        <div>
+          <div class="oa-prod-img" aria-hidden="true"></div>
+          <div class="oa-prod-thumbs" aria-hidden="true">
+            <div></div><div></div><div></div><div></div>
+          </div>
+        </div>
+
+        <div class="oa-prod-info">
+          <span class="rarity-pill"><span class="d"></span> Seventh Moon · 40 of 100 cast</span>
+          <h1><span class="accent">Ember</span>forged</h1>
+          <p class="byline">Hand-poured resin dice set with molten-gold ink. Numbered, sealed, signed.</p>
+
+          <div class="price-row">
+            <span class="price">$148</span>
+            <span class="stock"><span class="d"></span> 60 remain</span>
+          </div>
+
+          <p class="desc">A seven-die set cast in dark resin and inked with a gold pigment that catches candlelight the way ore catches torchlight. Each set is numbered on the D20 and packed in a cedar box with a hand-pressed lore card for this cycle's release.</p>
+
+          <div class="oa-var">
+            <div class="label">Finish</div>
+            <div class="opts">
+              <label class="chosen">Ember Gold</label>
+              <label>Silvered Ash</label>
+              <label>Obsidian Black</label>
+            </div>
+          </div>
+
+          <div class="oa-var">
+            <div class="label">Case</div>
+            <div class="opts">
+              <label>Linen pouch</label>
+              <label class="chosen">Cedar box</label>
+              <label>Walnut with inlay (+$40)</label>
+            </div>
+          </div>
+
+          <div class="oa-actions">
+            <div class="oa-qty">
+              <button aria-label="Decrease quantity">−</button>
+              <span>1</span>
+              <button aria-label="Increase quantity">+</button>
+            </div>
+            <a href="#" class="oa-cta">Claim a set</a>
+          </div>
+
+          <div class="oa-spec">
+            <h5>Specification</h5>
+            <dl>
+              <dt>Set</dt><dd>D4, D6, D8, D10, D%, D12, D20</dd>
+              <dt>Material</dt><dd>Pigmented resin, gold ink</dd>
+              <dt>Cast run</dt><dd>100 sets, numbered</dd>
+              <dt>Ships</dt><dd>Within 7 days of the moon's close</dd>
+              <dt>Returns</dt><dd>30 days, uncast &amp; unsealed</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 01 EDITORIAL ============================= -->
+<div class="concept-label">
+  <span><span class="num">01</span> &nbsp; Editorial Minimal</span>
+  <span class="tag">For: perfume · fashion · design objects</span>
+</div>
+<section id="c01" class="c01">
+  <div class="wrap">
+    <div class="meta-row">
+      <span class="issue">Issue Nº 04 — Spring</span>
+      <span>Atelier Maison</span>
+      <span>$84</span>
+    </div>
+    <div class="hero">
+      <div class="col-left"><div class="hero-img"></div></div>
+      <div class="col-right">
+        <h2>A quiet <em>object</em><br>for the morning ritual.</h2>
+        <p>Hand-poured in small batches. Unhurried. Unadorned.</p>
+        <p>Seven notes, one candle, forty hours of burn. Part of our Spring Atelier Edit — four objects chosen not to match, but to mean something together.</p>
+        <a href="#" class="c01-cta">Shop the edit</a>
+      </div>
+    </div>
+    <div class="features">
+      <div class="feat"><div class="num">Nº 01</div><h4>Unhurried formulation</h4><p>Seven weeks from brief to bottle. Nothing reactive, nothing trend-chasing.</p></div>
+      <div class="feat"><div class="num">Nº 02</div><h4>Small, named batches</h4><p>Every run is numbered, dated, and signed on the base. 240 pieces per release.</p></div>
+      <div class="feat"><div class="num">Nº 03</div><h4>Returned gracefully</h4><p>Thirty days, no questions, prepaid label.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 02 BRUTALIST ============================= -->
+<div class="concept-label">
+  <span><span class="num">02</span> &nbsp; Brutalist Streetwear</span>
+  <span class="tag">For: streetwear · sneakers · energy drinks</span>
+</div>
+<section id="c02" class="c02">
+  <div class="wrap">
+    <div class="tag-row"><span>DROP 03</span><span>★ Live Now</span><span>Ships 24hr</span></div>
+    <h2>DON'T THINK.<br><span class="outline">JUST</span> COP.</h2>
+    <div class="price-drop">–40% today only</div>
+    <p class="lede">New drop. Old rules. Three pieces, three hundred units each, then never again.</p>
+    <a href="#" class="c02-cta">Shop the drop →</a>
+    <div class="drops">
+      <div class="drop"><div class="num">01</div><h4>Heavyweight Tee</h4><p>14oz boxy-fit. Oversized screen print.</p><span class="sold">342 left</span></div>
+      <div class="drop"><div class="num">02</div><h4>Work Jacket</h4><p>Dyed canvas. Reverse stitch. No logo.</p><span class="sold">almost out</span></div>
+      <div class="drop"><div class="num">03</div><h4>Field Cap</h4><p>Six panel. Curved brim. Shop tag only.</p><span class="sold">back in stock</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 03 ORGANIC ============================= -->
+<div class="concept-label">
+  <span><span class="num">03</span> &nbsp; Organic / Wellness</span>
+  <span class="tag">For: skincare · supplements · botanicals</span>
+</div>
+<section id="c03" class="c03">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <div class="kicker">~ a small ritual ~</div>
+        <h2>Skin that remembers <em>how to rest.</em></h2>
+        <p class="lede">Three botanicals. One bottle. No actives fighting each other for attention.</p>
+        <a href="#" class="c03-cta">Start your ritual</a>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <div class="circle"></div><div class="leaf"></div><div class="leaf-2"></div>
+        <div class="dot dot-1"></div><div class="dot dot-2"></div>
+      </div>
+    </div>
+    <div class="ingredients">
+      <div class="ing"><div class="symbol">✿</div><h5>Rosehip</h5><p>Vitamin A, naturally</p></div>
+      <div class="ing"><div class="symbol">❋</div><h5>Chamomile</h5><p>Calms reactive skin</p></div>
+      <div class="ing"><div class="symbol">✾</div><h5>Squalane</h5><p>From olives, not sharks</p></div>
+      <div class="ing"><div class="symbol">❀</div><h5>Niacinamide</h5><p>A gentle 5%</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 04 TECH ============================= -->
+<div class="concept-label">
+  <span><span class="num">04</span> &nbsp; Tech / SaaS</span>
+  <span class="tag">For: software · electronics · DTC tech</span>
+</div>
+<section id="c04" class="c04">
+  <div class="wrap">
+    <div class="pill"><span class="dot"></span> v3.0 is live</div>
+    <h2>Ship faster with an <span class="grad">analytics stack</span> that doesn't fight you.</h2>
+    <p class="lede">Meridian is the tracking layer, dashboard, and alert system your ops team was going to build next quarter. Running in 90 seconds. Free while you're small.</p>
+    <div class="c04-cta-row">
+      <a href="#" class="c04-cta">Start free →</a>
+      <a href="#" class="c04-cta ghost">Watch 90s demo</a>
+    </div>
+    <div class="specs">
+      <div class="spec"><div class="big">90s</div><h5>To first dashboard</h5><p>Install our SDK, paste one line, see traffic.</p></div>
+      <div class="spec"><div class="big">99.98%</div><h5>Uptime, last 12 months</h5><p>Public status page. Real numbers.</p></div>
+      <div class="spec"><div class="big">$0</div><h5>Forever free tier</h5><p>Up to 10k events a month.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 05 HERITAGE ============================= -->
+<div class="concept-label">
+  <span><span class="num">05</span> &nbsp; Vintage / Heritage</span>
+  <span class="tag">For: coffee · whiskey · leather · artisan food</span>
+</div>
+<section id="c05" class="c05">
+  <div class="stamp" aria-hidden="true">SINCE<br>MCMXLVII<br>· GENUINE ·</div>
+  <div class="wrap">
+    <div class="letterhead">
+      <div class="emblem">B</div>
+      <div class="est">Bellwether &amp; Co. — Established 1947</div>
+    </div>
+    <div class="hero">
+      <div class="tagline">Purveyors of small-batch roasts</div>
+      <h2>Coffee worth <span class="italic">rising early</span> for.</h2>
+      <p>Four single-origin roasts, turned by hand over a ten-year-old drum roaster in a former print shop on the east side of town.</p>
+      <a href="#" class="c05-cta">Begin a subscription</a>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><div class="roman">I.</div><h5>Sourced Honestly</h5><p>Named farms. Traceable to the co-op.</p></div>
+      <div class="pillar"><div class="roman">II.</div><h5>Roasted Slowly</h5><p>Small batches. Roast dates stamped on every bag.</p></div>
+      <div class="pillar"><div class="roman">III.</div><h5>Shipped Fresh</h5><p>Out the door within 48 hours of the roast.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 06 PLAYFUL ============================= -->
+<div class="concept-label">
+  <span><span class="num">06</span> &nbsp; Playful / Y2K</span>
+  <span class="tag">For: candy · kids · gaming · meme-aware DTC</span>
+</div>
+<section id="c06" class="c06">
+  <div class="wrap">
+    <div class="badge">★ New drop alert ★</div>
+    <h2>Snacks that <span class="glow">slap.</span> Seriously.</h2>
+    <p class="lede">Six flavors, zero corn syrup, 100% the-best-thing-in-your-lunchbox energy.</p>
+    <a href="#" class="c06-cta">Build your pack</a>
+    <div class="bubbles">
+      <div class="bubble"><span class="emoji">🍓</span><h5>Berry Blast</h5><p>Tangy, chewy, faintly suspicious.</p><div class="price">$6 / bag</div></div>
+      <div class="bubble"><span class="emoji">🍋</span><h5>Sour Power</h5><p>Face-scrunching confirmed.</p><div class="price">$6 / bag</div></div>
+      <div class="bubble"><span class="emoji">🍇</span><h5>Grape Escape</h5><p>Purple-coded comfort.</p><div class="price">$6 / bag</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= BOOTHCRM CASE STUDY ============================= -->
+<div class="concept-label">
+  <span><span class="num">◆</span> &nbsp; Case Study · Live Product</span>
+  <span class="tag">Designed · Built · Shipped</span>
+</div>
+<section id="boothcrm" class="bcrm">
+  <div class="wrap">
+    <div class="case-head">
+      <span class="tag live">Live in production</span>
+      <span class="tag stack">Django · PostgreSQL · Heroku</span>
+    </div>
+
+    <div class="case-grid">
+      <div>
+        <div class="logo-row">
+          <span class="hex" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.75">
+              <polygon points="12,2 21,7 21,17 12,22 3,17 3,7"/>
+            </svg>
+          </span>
+          BoothCRM
+        </div>
+
+        <h2>A CRM built for the people who actually <em>run the booth.</em></h2>
+        <p class="bcrm-lede">Most CRMs assume you're selling software. BoothCRM is for vendors, guest bookers, food operators, and sponsor coordinators running trade shows, comic cons, and expos — where an "opportunity" is a booth and a "close date" is the show itself.</p>
+
+        <dl class="role-line">
+          <dt>Role</dt><dd>Design, product, full-stack build</dd>
+          <dt>Stack</dt><dd>Django, PostgreSQL, Heroku, vanilla JS</dd>
+          <dt>Status</dt><dd>Live, iterating with real vendor data</dd>
+        </dl>
+
+        <div class="bcrm-actions">
+          <a href="https://boothcrm-9de37e80aa44.herokuapp.com/accounts/" class="bcrm-cta" target="_blank" rel="noopener">Browse the live app</a>
+          <a href="https://github.com/andyperciballi" class="bcrm-cta ghost" target="_blank" rel="noopener">View source</a>
+        </div>
+      </div>
+
+      <!-- Mock app window showing a real-ish opportunities view -->
+      <div class="bcrm-mock" aria-label="BoothCRM opportunities view preview">
+        <div class="bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="url">boothcrm.herokuapp.com/opportunities/</div>
+        </div>
+        <div class="app-nav">
+          <span class="brand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polygon points="12,2 21,7 21,17 12,22 3,17 3,7"/></svg>
+            BoothCRM
+          </span>
+          <span>Accounts</span>
+          <span>Contacts</span>
+          <span class="active">Opportunities</span>
+          <span>Events</span>
+        </div>
+        <div class="app-body">
+          <h3>Opportunities</h3>
+          <div class="count">10 total · pipeline value $162,000</div>
+          <div class="filters">
+            <span class="on">Fan Expo 2026</span>
+            <span>In Forecast</span>
+            <span>All Stages</span>
+            <span>All Types</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Opportunity</th><th>Stage</th><th>Type</th><th>ARR</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="name">Felicia Day — Panel + Signing</td><td><span class="stage won">Closed Won</span></td><td>Signing</td><td>$45,000</td></tr>
+              <tr><td class="name">John Boyega — Appearance</td><td><span class="stage neg">Negotiating</span></td><td>Guest</td><td>$85,000</td></tr>
+              <tr><td class="name">NovaTech — Sponsor Package</td><td><span class="stage int">Interest</span></td><td>Sponsor</td><td>$15,000</td></tr>
+              <tr><td class="name">Pacific Candles — Booth</td><td><span class="stage prop">Proposal</span></td><td>Vendor</td><td>$1,800</td></tr>
+              <tr><td class="name">Wild Honey — Food Vendor</td><td><span class="stage won">Closed Won</span></td><td>Food</td><td>$1,600</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="bcrm-features">
+      <div class="bf">
+        <div class="sym">01</div>
+        <h4>Events as first-class citizens</h4>
+        <p>Opportunities, contacts, and revenue all roll up by show — Fan Expo, Comic Con — not quarter. Built around how conventions actually work.</p>
+      </div>
+      <div class="bf">
+        <div class="sym">02</div>
+        <h4>Vendor-specific pipeline types</h4>
+        <p>Nine opportunity types — Vendor, Food Vendor, Guest Appearance, Panel, Photo Op, Signing, Activity Room, Custom Room, Sponsor — because "deal" isn't specific enough.</p>
+      </div>
+      <div class="bf">
+        <div class="sym">03</div>
+        <h4>Forecast beyond stage</h4>
+        <p>A separate forecast dimension (In Forecast · Stretch · Unlikely · Out) so an early-stage whale doesn't distort the same field a late-stage stretch deal lives in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= DOCS ============================= -->
+<section id="docs" class="docs">
+  <div class="wrap">
+    <h2>Design <em>notes</em></h2>
+    <p class="subtitle">Why this lineup · PageFly practices · UX principles</p>
+
+    <h3>Why two D&amp;D concepts, then six others, then a CRM?</h3>
+    <p>The two D&amp;D directions at the top answer "can you do <em>this</em> niche?" — they're the ones a tabletop-games client needs to see first. "Tavern Parchment" is the warm, welcoming, tavern-booklet feel most TTRPG brands lean on. "Obsidian Arcane" is its opposite — dark, collector-grade, scarcity-driven — for premium dice makers, metal sets, and limited-edition studios. Both include a full product page because a landing page without a product page is half a portfolio.</p>
+    <p>The six concepts after that answer "can you do <em>anything else?</em>" — editorial to brutalist to playful. Different enough that no two live in the same week on Pinterest.</p>
+    <p>The BoothCRM case study closes the set because it's the only piece that's real, live, and mine end-to-end. It's there to answer the quiet question every hiring manager has: <em>can this person actually ship?</em></p>
+
+    <h3>UX principles applied throughout</h3>
+    <h4>One page, one job</h4>
+    <p>Each landing funnels to a single primary CTA. Each product page funnels to Add to Cart. Secondary links exist but are visually subordinate.</p>
+
+    <h4>Value prop above the fold</h4>
+    <p>Every hero answers "what's in it for me?" in the first screenful — concrete benefit, small trust signal, clear next action. No manifesto before the offer.</p>
+
+    <h4>Product-page anatomy</h4>
+    <p>Both D&amp;D product pages follow the proven pattern: breadcrumb → image + thumbs → title/rarity → price + availability → short description → variant pickers → quantity + Add to Cart → "what's included" reassurance block. Same bones, different voice.</p>
+
+    <h4>Mobile-first rhythm</h4>
+    <p>Every grid collapses cleanly at 820px and 780px. Type uses <code>clamp()</code> so headlines don't overflow phones. Touch targets stay above 44px.</p>
+
+    <h4>Accessibility</h4>
+    <ul>
+      <li>Contrast ratios tested on every body-text pairing.</li>
+      <li>Decorative shapes (rune rings, stamps, sparkles) marked <code>aria-hidden="true"</code>.</li>
+      <li>Semantic HTML throughout. One h1 per page equivalent (the product's actual name).</li>
+      <li>Focus states preserved on all links and buttons.</li>
+    </ul>
+
+    <h3>PageFly best practices</h3>
+    <ul>
+      <li><strong>Start from a CRO-tested template</strong>, then replace sections — PageFly's subscription-box and D2C templates already have the right structural bones.</li>
+      <li><strong>Use Global Styles for color + type.</strong> Define the palette (parchment/crimson/gold for Tavern, obsidian/ember/bone for Arcane) as global tokens. Client tweaks cascade instead of being hunted down.</li>
+      <li><strong>Build mobile + tablet views explicitly.</strong> Check 375px and 768px before publishing every page.</li>
+      <li><strong>Save high-performing blocks as Saved Sections</strong> — the stat-block grid, the rune pillars, the "what's included" reassurance panel should all be reusable across landers.</li>
+      <li><strong>Turn on A/B testing</strong> for primary CTAs and hero headlines. At least one full week per test.</li>
+      <li><strong>Avoid perma-countdowns.</strong> Scope urgency to real campaigns only.</li>
+      <li><strong>Mind the uninstall footgun</strong> — PageFly's uninstaller removes every page it has ever touched. Back up before major changes.</li>
+      <li><strong>Optimize images inside PageFly</strong> — use built-in compression and lazy-loading. No 4MB hero images.</li>
+      <li><strong>One H1 per page.</strong> Pick heading levels deliberately for SEO.</li>
+    </ul>
+
+    <h3>What's placeholder, what's real</h3>
+    <p>Brand names in the Shopify concepts are invented. CSS gradients and SVG shapes stand in for photography. The BoothCRM section is the exception — it's a real, live Django app I built, with real filters, real pipeline types, and real vendor data, hosted at <code>boothcrm-9de37e80aa44.herokuapp.com</code>. You can click through it.</p>
+  </div>
+</section>
+
+<footer class="sig">
+  Eight concepts · Two product pages · One live CRM · Built by Andy Perciballi
+</footer>
+
+</body>
+</html>
